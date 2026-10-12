@@ -6,18 +6,20 @@
 
 <!-- ===================================================================
      EDITING GUIDE
-     1. Name / affiliation   → search "EDIT:identity"
-     2. Contact links        → search "EDIT:contact"
-     3. Add / change project → search "EDIT:project", copy a whole
-                               <article class="card"> block
-     4. Fill a OneDrive link → search "ONEDRIVE", replace href="#"
+     1. Lab name / description → search "EDIT:identity"
+     2. Contact links          → search "EDIT:contact"
+     3. Research topics        → search "EDIT:topic", copy a whole
+                                 <article class="topic"> block
+     4. Work-in-progress cards → search "EDIT:project", copy a whole
+                                 <article class="card"> block
+     5. Fill a OneDrive link   → search "ONEDRIVE", replace href="#"
      Save, push to GitHub, live in a minute or two.
      =================================================================== -->
 
-<title>Kent CS AI</title>
+<title>Kent State University AI Lab</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <style>
-/* Layout: single reading column; projects as a responsive card grid. */
+/* Layout: single reading column; research topics stacked, WIP work as cards. */
 :root{
   --bg:#f6f7fa; --surface:#ffffff; --surface-2:#eef1f6;
   --fg:#161b26; --muted:#5a6475; --line:#dfe4ec;
@@ -53,26 +55,39 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-sans);
      font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
 img{max-width:100%}
 [hidden]{display:none!important}
-.wrap{max-width:900px;margin:0 auto;padding-inline:20px;padding-block:0 80px}
+.wrap{max-width:880px;margin:0 auto;padding-inline:20px;padding-block:0 80px}
 
 /* ---- header ---- */
-header{padding-block:56px 36px;border-bottom:1px solid var(--line)}
-h1{font-size:clamp(28px,5vw,40px);margin:0 0 6px;font-weight:600;letter-spacing:-.025em;
+header{padding-block:56px 34px;border-bottom:1px solid var(--line)}
+h1{font-size:clamp(27px,4.8vw,38px);margin:0 0 10px;font-weight:600;letter-spacing:-.025em;
    text-wrap:balance}
-.role{font-size:17px;color:var(--muted);margin:0 0 22px;max-width:62ch}
+.role{font-size:16.5px;color:var(--muted);margin:0 0 22px;max-width:64ch}
 .links{display:flex;flex-wrap:wrap;gap:8px}
-.links a{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;text-decoration:none;
+.links a{display:inline-flex;align-items:center;font-size:13.5px;text-decoration:none;
   color:var(--fg);background:var(--surface);border:1px solid var(--line);
   border-radius:6px;padding:6px 12px;transition:border-color .15s,color .15s}
 .links a:hover{border-color:var(--accent);color:var(--accent)}
 .links a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 /* ---- sections ---- */
-section{padding-block:40px 0}
-h2{font-size:13px;margin:0 0 20px;font-weight:600;color:var(--muted);
+section{padding-block:44px 0}
+h2{font-size:13px;margin:0 0 8px;font-weight:600;color:var(--muted);
    text-transform:uppercase;letter-spacing:.09em}
+.sec-note{font-size:14px;color:var(--muted);margin:0 0 26px;max-width:64ch}
 
-/* ---- project cards ---- */
+/* ---- research topics ---- */
+.topic{padding-block:22px;border-top:1px solid var(--line)}
+.topic:first-of-type{border-top:0;padding-top:4px}
+.topic h3{font-size:17.5px;margin:0 0 6px;font-weight:600;letter-spacing:-.01em}
+.topic p{margin:0 0 14px;color:var(--muted);font-size:14.5px;max-width:66ch}
+.pubs{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.pubs li{display:flex;gap:12px;align-items:baseline;font-size:14px;min-width:0}
+.pubs .venue{font-family:var(--font-mono);font-size:11.5px;font-weight:500;color:var(--accent);
+  background:var(--surface-2);border-radius:4px;padding:2px 7px;white-space:nowrap;
+  flex:0 0 auto;min-width:88px;text-align:center}
+.pubs .t{min-width:0}
+
+/* ---- WIP cards ---- */
 .grid{display:grid;gap:16px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:9px;
       padding:20px 22px;min-width:0}
@@ -102,8 +117,10 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);
        font-size:13px;color:var(--muted)}
 footer a{color:var(--accent)}
 @media (max-width:560px){
-  header{padding-block:40px 28px}
+  header{padding-block:40px 26px}
   .card{padding:17px 18px}
+  .pubs li{flex-direction:column;gap:3px}
+  .pubs .venue{min-width:0;text-align:left;align-self:flex-start}
 }
 </style>
 </head>
@@ -112,48 +129,128 @@ footer a{color:var(--accent)}
 <div class="wrap">
 
 <header>
-  <!-- EDIT:identity — replace the heading with your own name if you prefer a personal page -->
-  <h1>Kent CS AI</h1>
+  <!-- EDIT:identity -->
+  <h1>Kent State University AI Lab</h1>
   <p class="role">
-    Machine learning for computational biology. Current work spans protein structure
-    representation, B-cell epitope prediction, and quantum-chemical features for
-    biological sequence models.
+    We design and apply machine learning, computer vision, and deep learning
+    techniques to solve practical problems, spanning drug discovery, medical
+    image processing, and bioinformatics.
   </p>
   <!-- EDIT:contact -->
   <nav class="links">
+    <a href="https://yuzhiguo07.github.io/">PI Homepage</a>
+    <a href="https://scholar.google.com/citations?user=UNgRbboAAAAJ&amp;hl=en">Google Scholar</a>
     <a href="https://github.com/kent-cs-ai">GitHub</a>
     <a href="mailto:yguo30@kent.edu">yguo30@kent.edu</a>
   </nav>
 </header>
 
 <section>
-  <h2>Projects</h2>
+  <h2>Research Areas</h2>
+  <p class="sec-note">Selected publications per topic; some work spans more than one area. See the <a href="https://yuzhiguo07.github.io/" style="color:var(--accent)">PI homepage</a> for the full list.</p>
+
+  <!-- EDIT:topic — copy a whole article block to add a research area -->
+  <article class="topic">
+    <h3>Large Language Models &amp; Guideline-Driven Reasoning</h3>
+    <p>
+      Teaching models to follow explicit written rules: turning guidelines into environments a model can act in, optimizing prompts for expert annotation, and grounding multimodal reasoning in domain protocols.
+    </p>
+    <ul class="pubs">
+      <li><span class="venue">ACL'26</span><span class="t">Guidelines as Environments: A World Model Approach to Rule Following</span></li>
+      <li><span class="venue">AAAI'26</span><span class="t">Learning from Guidelines: Structured Prompt Optimization for Expert Annotation Tasks</span></li>
+      <li><span class="venue">CVPR'26</span><span class="t">Universal Guideline-Driven Image Clustering via a Hybrid LLM Agent</span></li>
+      <li><span class="venue">MIDL'26</span><span class="t">Guideline-Informed MLLM Reasoning for Pathology-Aware Post-Operative Prostate CTV Segmentation</span></li>
+    </ul>
+  </article>
+
+  <article class="topic">
+    <h3>Multimodal Representation Learning</h3>
+    <p>
+      Aligning and fusing heterogeneous sources — images, text, molecules, clinical records — into shared representations, with attention to the geometry of the embedding space and to what happens when modalities are missing.
+    </p>
+    <ul class="pubs">
+      <li><span class="venue">ICLR'26</span><span class="t">GRAM-DTI: Adaptive Multimodal Representation Learning for Drug-Target Interaction Prediction</span></li>
+      <li><span class="venue">CVPR'26</span><span class="t">Hyperbolic Gramian Volumes for Multimodal Alignment</span></li>
+      <li><span class="venue">NeurIPS'25</span><span class="t">TRIDENT: Tri-Modal Molecular Representation Learning with Taxonomic Annotations and Local Correspondence</span></li>
+      <li><span class="venue">ECCV'26</span><span class="t">Histopathology Multi-modal Embedding for Pathology Composed Retrieval</span></li>
+      <li><span class="venue">ICCV'25</span><span class="t">Zero-Shot Composed Image Retrieval via Dual-Stream Instruction-Aware Distillation</span></li>
+      <li><span class="venue">MIDL'26</span><span class="t">Heterogeneous Aligned Fusion for Survival Prediction with Missing Modalities</span></li>
+    </ul>
+  </article>
+
+  <article class="topic">
+    <h3>Medical Imaging &amp; Computational Pathology</h3>
+    <p>
+      Whole-slide image analysis, nuclei segmentation, survival prediction and screening from medical images, with a focus on learning under weak labels and on predictions clinicians can interpret.
+    </p>
+    <ul class="pubs">
+      <li><span class="venue">IEEE TNNLS</span><span class="t">Segment Any Cell: A SAM-based Auto-prompting Fine-tuning Framework for Nuclei Segmentation</span></li>
+      <li><span class="venue">NPJ Dig. Med.</span><span class="t">Multi-modal Analysis of Whole Slide Images in Colorectal Cancer</span></li>
+      <li><span class="venue">MICCAI'24</span><span class="t">PathM3: A Multimodal Multi-Task Multiple Instance Learning Framework for Whole Slide Image Classification and Captioning</span></li>
+      <li><span class="venue">MICCAI'25</span><span class="t">HAGE: Hierarchical Alignment Gene-Enhanced Pathology Representation Learning with Spatial Transcriptomics</span></li>
+      <li><span class="venue">MICCAI'25</span><span class="t">Text-Guided Multi-Instance Learning for Scoliosis Screening via Gait Video Analysis</span></li>
+      <li><span class="venue">MIDL'26</span><span class="t">Guideline-Informed MLLM Reasoning for Pathology-Aware Post-Operative Prostate CTV Segmentation</span></li>
+      <li><span class="venue">ISBI'25</span><span class="t">Contrastive Pretraining for Computational Pathology With Visual Language Models</span></li>
+      <li><span class="venue">Front. Med.</span><span class="t">Abnormality-aware Multimodal Learning for WSI Classification</span></li>
+      <li><span class="venue">ACM BCB'24</span><span class="t">MFMF: Multiple Foundation Model Fusion Networks for Whole Slide Image Classification</span></li>
+      <li><span class="venue">ICCV'21</span><span class="t">Exploring Robustness of Unsupervised Domain Adaptation in Semantic Segmentation</span></li>
+    </ul>
+  </article>
+
+  <article class="topic">
+    <h3>Gene Function &amp; Genomics</h3>
+    <p>
+      Language models and graph methods for genomic sequence and gene annotation: motif-oriented DNA pretraining, Gene Ontology-informed representations, and predicting the phenotypic consequences of gene knockouts.
+    </p>
+    <ul class="pubs">
+      <li><span class="venue">AAAI'26</span><span class="t">GenePheno: Interpretable Gene Knockout-Induced Phenotype Abnormality Prediction from Gene Sequences</span></li>
+      <li><span class="venue">AAAI'25</span><span class="t">GoBERT: Gene Ontology Graph Informed BERT for Universal Gene Function Prediction</span></li>
+      <li><span class="venue">BioMedInform.</span><span class="t">Advancing DNA Language Models through Motif-Oriented Pre-training with MoDNA</span></li>
+      <li><span class="venue">ACM BCB'22</span><span class="t">MoDNA: Motif-Oriented Pre-training for DNA Language Model</span></li>
+      <li><span class="venue">MICCAI'25</span><span class="t">HAGE: Hierarchical Alignment Gene-Enhanced Pathology Representation Learning with Spatial Transcriptomics</span></li>
+    </ul>
+  </article>
+
+  <article class="topic">
+    <h3>Protein Modeling</h3>
+    <p>
+      Representation learning for protein sequence and structure — secondary structure and structural property prediction, self-supervised pretraining from tertiary structures, and enhancing evolutionary profiles — together with the immune receptor side: BCR and TCR repertoires, antigen binding affinity and B-cell epitope prediction.
+    </p>
+    <ul class="pubs">
+      <li><span class="venue">Nature Cancer</span><span class="t">Profiling Antigen Binding Affinity of B Cell Repertoires in Tumors by Deep Learning</span></li>
+      <li><span class="venue">Brief. Bioinform.</span><span class="t">GTE: A Graph Learning Framework for Prediction of T-Cell Receptors and Epitopes Binding Specificity</span></li>
+      <li><span class="venue">ACM BCB'24</span><span class="t">AlphaEpi: Enhancing B Cell Epitope Prediction with AlphaFold 3</span></li>
+      <li><span class="venue">AAAI'22</span><span class="t">Self-supervised Pretraining for Protein Embeddings Using Tertiary Structures</span></li>
+      <li><span class="venue">IEEE BIBM'20</span><span class="t">Protein Ensemble Learning with Atrous Spatial Pyramid Networks for Secondary Structure Prediction</span></li>
+      <li><span class="venue">RECOMB'20</span><span class="t">Bagging MSA Learning: Enhancing Low-Quality PSSM with Deep Learning for Accurate Protein Structure Property Prediction</span></li>
+      <li><span class="venue">IEEE BIBM'20</span><span class="t">WeightAln: Weighted Homologous Alignment for Protein Structure Property Prediction</span></li>
+      <li><span class="venue">J. Comput. Biol.</span><span class="t">EPTool: A New Enhancing PSSM Tool for Protein Secondary Structure Prediction</span></li>
+    </ul>
+  </article>
+
+  <article class="topic">
+    <h3>Molecular Representation and Property Prediction</h3>
+    <p>
+      Pretraining and robust training for molecular property prediction, including learning from limited labels and handling the distribution shift that comes with new chemical space.
+    </p>
+    <ul class="pubs">
+      <li><span class="venue">ACM BCB'19</span><span class="t">SMILES-BERT: Large Scale Unsupervised Pre-training for Molecular Property Prediction</span></li>
+      <li><span class="venue">ICLR'26</span><span class="t">GRAM-DTI: Adaptive Multimodal Representation Learning for Drug-Target Interaction Prediction</span></li>
+      <li><span class="venue">NeurIPS'25</span><span class="t">TRIDENT: Tri-Modal Molecular Representation Learning with Taxonomic Annotations and Local Correspondence</span></li>
+      <li><span class="venue">J. Comput. Biol.</span><span class="t">Towards Robust Self-training for Molecular Biology Prediction Tasks</span></li>
+      <li><span class="venue">IEEE BIBM'21</span><span class="t">Gradient-Norm Based Attentive Loss for Molecular Property Prediction</span></li>
+      <li><span class="venue">IEEE BIBM'20</span><span class="t">Improving Molecular Property Prediction on Limited Data with Deep Multi-Label Learning</span></li>
+      <li><span class="venue">ICML Workshop</span><span class="t">CoSSL: A Context-based Semi-Supervised Framework for Molecular Property Prediction</span></li>
+    </ul>
+  </article>
+</section>
+
+<section>
+  <h2>Work in Progress</h2>
+  <p class="sec-note">Ongoing projects, with internal notes linked where available.</p>
   <div class="grid">
 
     <!-- EDIT:project — copy this whole article block to add a project -->
-    <article class="card">
-      <div class="card-top">
-        <h3>AlphaEpi</h3>
-        <span class="chip c-pub">Published · ACM-BCB 2024</span>
-      </div>
-      <p>
-        Enhancing B-cell epitope prediction with AlphaFold 3. A dynamic selector adapts
-        processing to the reliability of the structural and sequence signals, and a graph
-        fusion module integrates structural with evolutionary information. Full pipeline
-        reproduced, with a controlled comparison across six GNN variants.
-      </p>
-      <div class="tags">
-        <span class="tag">ESM-2</span><span class="tag">AlphaFold 3</span>
-        <span class="tag">GraphSAGE</span><span class="tag">PyTorch Geometric</span>
-      </div>
-      <div class="acts">
-        <a href="https://github.com/uta-smile/AlphaEpi">Code</a>
-        <a href="https://dl.acm.org/doi/10.1145/3698587.3701389">Paper</a>
-        <!-- ONEDRIVE: replace href with the OneDrive link to the reproduction report -->
-        <a href="#">Reproduction report <span class="ext">↗ OneDrive</span></a>
-      </div>
-    </article>
-
     <article class="card">
       <div class="card-top">
         <h3>Quantum features for epitope prediction</h3>
@@ -182,16 +279,22 @@ footer a{color:var(--accent)}
 
     <article class="card">
       <div class="card-top">
-        <h3>Project name</h3>
+        <h3>Gene-perturbation</h3>
         <span class="chip c-wip">In progress</span>
       </div>
-      <p>
-        One or two sentences on what this project does and where it currently stands.
-        Placeholder text — replace it.
-      </p>
-      <div class="tags">
-        <span class="tag">keyword</span><span class="tag">keyword</span>
+      <p>WIP</p>
+      <div class="acts">
+        <!-- ONEDRIVE -->
+        <a href="#">Progress notes <span class="ext">↗ OneDrive</span></a>
       </div>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <h3>KEGG</h3>
+        <span class="chip c-wip">In progress</span>
+      </div>
+      <p>WIP</p>
       <div class="acts">
         <!-- ONEDRIVE -->
         <a href="#">Progress notes <span class="ext">↗ OneDrive</span></a>
