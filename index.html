@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- ===================================================================
+     EDITING GUIDE
+     1. Name / affiliation   → search "EDIT:identity"
+     2. Contact links        → search "EDIT:contact"
+     3. Add / change project → search "EDIT:project", copy a whole
+                               <article class="card"> block
+     4. Fill a OneDrive link → search "ONEDRIVE", replace href="#"
+     Save, push to GitHub, live in a minute or two.
+     =================================================================== -->
+
+<title>Kent CS AI</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+/* Layout: single reading column; projects as a responsive card grid. */
+:root{
+  --bg:#f6f7fa; --surface:#ffffff; --surface-2:#eef1f6;
+  --fg:#161b26; --muted:#5a6475; --line:#dfe4ec;
+  --accent:#2f52e0;
+  --s-wip:#9c5f14; --s-wip-bg:#fdf3e3;
+  --s-done:#0e7490; --s-done-bg:#e3f4f8;
+  --s-pub:#2f6b35; --s-pub-bg:#e8f4e9;
+  --font-sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f131c; --surface:#161c28; --surface-2:#1d2533;
+  --fg:#e6eaf2; --muted:#98a3b8; --line:#28313f;
+  --accent:#7d9bff;
+  --s-wip:#e0a455; --s-wip-bg:#2a2414;
+  --s-done:#4fc3d7; --s-done-bg:#10303a;
+  --s-pub:#7fc088; --s-pub-bg:#16301a;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f131c; --surface:#161c28; --surface-2:#1d2533;
+  --fg:#e6eaf2; --muted:#98a3b8; --line:#28313f;
+  --accent:#7d9bff;
+  --s-wip:#e0a455; --s-wip-bg:#2a2414;
+  --s-done:#4fc3d7; --s-done-bg:#10303a;
+  --s-pub:#7fc088; --s-pub-bg:#16301a;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-sans);
+     font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+[hidden]{display:none!important}
+.wrap{max-width:900px;margin:0 auto;padding-inline:20px;padding-block:0 80px}
+
+/* ---- header ---- */
+header{padding-block:56px 36px;border-bottom:1px solid var(--line)}
+h1{font-size:clamp(28px,5vw,40px);margin:0 0 6px;font-weight:600;letter-spacing:-.025em;
+   text-wrap:balance}
+.role{font-size:17px;color:var(--muted);margin:0 0 22px;max-width:62ch}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links a{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;text-decoration:none;
+  color:var(--fg);background:var(--surface);border:1px solid var(--line);
+  border-radius:6px;padding:6px 12px;transition:border-color .15s,color .15s}
+.links a:hover{border-color:var(--accent);color:var(--accent)}
+.links a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---- sections ---- */
+section{padding-block:40px 0}
+h2{font-size:13px;margin:0 0 20px;font-weight:600;color:var(--muted);
+   text-transform:uppercase;letter-spacing:.09em}
+
+/* ---- project cards ---- */
+.grid{display:grid;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:9px;
+      padding:20px 22px;min-width:0}
+.card-top{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.card h3{font-size:18px;margin:0;font-weight:600;letter-spacing:-.01em;flex:1 1 auto;min-width:0}
+.chip{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap;
+      letter-spacing:.02em;flex:0 0 auto}
+.c-wip{color:var(--s-wip);background:var(--s-wip-bg)}
+.c-done{color:var(--s-done);background:var(--s-done-bg)}
+.c-pub{color:var(--s-pub);background:var(--s-pub-bg)}
+.card p{margin:0 0 14px;color:var(--muted);font-size:14.5px;max-width:66ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.tag{font-family:var(--font-mono);font-size:11.5px;color:var(--muted);
+     background:var(--surface-2);border-radius:4px;padding:2px 7px}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+.acts a{font-size:13px;text-decoration:none;color:var(--accent);border:1px solid var(--line);
+  border-radius:6px;padding:5px 11px;transition:background .15s,border-color .15s}
+.acts a:hover{background:var(--surface-2);border-color:var(--accent)}
+.acts a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.acts a[href="#"]{color:var(--muted);pointer-events:none;opacity:.55}
+.acts a .ext{font-size:11px;opacity:.65}
+
+.hint{font-size:13px;color:var(--muted);background:var(--surface-2);
+      border:1px solid var(--line);border-radius:7px;padding:12px 15px;margin-top:18px}
+
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);
+       font-size:13px;color:var(--muted)}
+footer a{color:var(--accent)}
+@media (max-width:560px){
+  header{padding-block:40px 28px}
+  .card{padding:17px 18px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <!-- EDIT:identity — replace the heading with your own name if you prefer a personal page -->
+  <h1>Kent CS AI</h1>
+  <p class="role">
+    Machine learning for computational biology. Current work spans protein structure
+    representation, B-cell epitope prediction, and quantum-chemical features for
+    biological sequence models.
+  </p>
+  <!-- EDIT:contact -->
+  <nav class="links">
+    <a href="https://github.com/kent-cs-ai">GitHub</a>
+    <a href="mailto:yguo30@kent.edu">yguo30@kent.edu</a>
+  </nav>
+</header>
+
+<section>
+  <h2>Projects</h2>
+  <div class="grid">
+
+    <!-- EDIT:project — copy this whole article block to add a project -->
+    <article class="card">
+      <div class="card-top">
+        <h3>AlphaEpi</h3>
+        <span class="chip c-pub">Published · ACM-BCB 2024</span>
+      </div>
+      <p>
+        Enhancing B-cell epitope prediction with AlphaFold 3. A dynamic selector adapts
+        processing to the reliability of the structural and sequence signals, and a graph
+        fusion module integrates structural with evolutionary information. Full pipeline
+        reproduced, with a controlled comparison across six GNN variants.
+      </p>
+      <div class="tags">
+        <span class="tag">ESM-2</span><span class="tag">AlphaFold 3</span>
+        <span class="tag">GraphSAGE</span><span class="tag">PyTorch Geometric</span>
+      </div>
+      <div class="acts">
+        <a href="https://github.com/uta-smile/AlphaEpi">Code</a>
+        <a href="https://dl.acm.org/doi/10.1145/3698587.3701389">Paper</a>
+        <!-- ONEDRIVE: replace href with the OneDrive link to the reproduction report -->
+        <a href="#">Reproduction report <span class="ext">↗ OneDrive</span></a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <h3>Quantum features for epitope prediction</h3>
+        <span class="chip c-wip">In progress</span>
+      </div>
+      <p>
+        Whole-chain electronic structure of antigens computed with the GFN2-xTB
+        semiempirical method, yielding per-residue electronic properties and
+        residue-pair correlations as additional features for epitope prediction.
+        Calculations complete for the 15 test antigens; the 338 training antigens
+        are still running.
+      </p>
+      <div class="tags">
+        <span class="tag">GFN2-xTB</span><span class="tag">Qiskit</span>
+        <span class="tag">Fukui functions</span><span class="tag">PDOS</span>
+      </div>
+      <div class="acts">
+        <!-- ONEDRIVE: quantum_array_catalog_en.html -->
+        <a href="https://ksuprod-my.sharepoint.com/:u:/r/personal/yguo30_kent_edu/Documents/Kent/Projects-web/Quantum-alphaepi/quantum_array_catalog_en.html?d=wd9307c88617e4330bc065a6e04fecdbb&amp;csf=1&amp;web=1&amp;e=mA1bKx">Data array catalog <span class="ext">↗ OneDrive</span></a>
+        <!-- ONEDRIVE: quantum_array_catalog_zh.html -->
+        <a href="https://ksuprod-my.sharepoint.com/:u:/r/personal/yguo30_kent_edu/Documents/Kent/Projects-web/Quantum-alphaepi/quantum_array_catalog_zh.html?d=wf17a330f35d04e27b3781af19a9f162d&amp;csf=1&amp;web=1&amp;e=XiJHZH">数据清单（中文） <span class="ext">↗ OneDrive</span></a>
+        <!-- ONEDRIVE: feature validation report, fill in when ready -->
+        <a href="#">Feature validation <span class="ext">↗ OneDrive</span></a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <h3>Project name</h3>
+        <span class="chip c-wip">In progress</span>
+      </div>
+      <p>
+        One or two sentences on what this project does and where it currently stands.
+        Placeholder text — replace it.
+      </p>
+      <div class="tags">
+        <span class="tag">keyword</span><span class="tag">keyword</span>
+      </div>
+      <div class="acts">
+        <!-- ONEDRIVE -->
+        <a href="#">Progress notes <span class="ext">↗ OneDrive</span></a>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="hint">
+    Links marked <strong>↗ OneDrive</strong> require access. Download the HTML file and
+    open it in a browser to read it.
+  </div>
+</section>
+
+<footer>
+  Last updated October 2026 · <a href="https://github.com/kent-cs-ai">github.com/kent-cs-ai</a>
+</footer>
+
+</div>
+
+</body>
+</html>
